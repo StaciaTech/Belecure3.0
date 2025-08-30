@@ -1,0 +1,295 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Force black background globally */
+html, body, #root {
+  background-color: #000000 !important;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Bitcount Prop Single Font Face Declarations */
+@font-face {
+  font-family: 'Bitcount Prop Single';
+  src: url('/Bitcount_Prop_Single/static/BitcountPropSingle-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount Prop Single';
+  src: url('/Bitcount_Prop_Single/static/BitcountPropSingle-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount Prop Single';
+  src: url('/Bitcount_Prop_Single/static/BitcountPropSingle-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount Prop Single';
+  src: url('/Bitcount_Prop_Single/static/BitcountPropSingle-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitcount Prop Single';
+  src: url('/Bitcount_Prop_Single/static/BitcountPropSingle-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Global Font Settings - Everything uses Bitcount */
+* {
+  font-family: 'Bitcount Prop Single', 'SF Pro Display', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-feature-settings: 'cv01', 'cv02', 'cv03', 'cv04';
+}
+
+/* Dark theme glassmorphism card */
+.cyber-card {
+  background: rgba(5, 5, 5, 0.98) !important;
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(147, 0, 1, 0.3);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(147, 0, 1, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.cyber-card-light {
+  background: rgba(8, 8, 8, 0.95) !important;
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(147, 0, 1, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(147, 0, 1, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+/* Premium dark maroon gradient border */
+.cyber-border {
+  background: linear-gradient(135deg, #930001, #B91C1C, #DC2626);
+  padding: 1px;
+  border-radius: 16px;
+}
+
+.cyber-border-content {
+  background: rgba(5, 5, 5, 0.99) !important;
+  border-radius: 15px;
+}
+
+/* Futuristic floating animation */
+.cyber-float {
+  animation: cyberFloat 8s ease-in-out infinite;
+}
+
+@keyframes cyberFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-8px) rotate(1deg); }
+  66% { transform: translateY(4px) rotate(-0.5deg); }
+}
+
+/* Advanced glow effects with dark maroon */
+.cyber-glow {
+  animation: cyberGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes cyberGlow {
+  from { 
+    box-shadow: 
+      0 0 20px rgba(147, 0, 1, 0.4),
+      0 0 40px rgba(147, 0, 1, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  }
+  to { 
+    box-shadow: 
+      0 0 30px rgba(147, 0, 1, 0.6),
+      0 0 60px rgba(147, 0, 1, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* Slide up with modern easing */
+.cyber-slide-up {
+  animation: cyberSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes cyberSlideUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(40px) scale(0.95); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0) scale(1); 
+  }
+}
+
+/* Modern hover effects */
+.cyber-hover {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cyber-hover:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(147, 0, 1, 0.3),
+    0 0 30px rgba(147, 0, 1, 0.2);
+}
+
+/* Premium dark maroon text glow */
+.cyber-text-glow {
+  text-shadow: 
+    0 0 10px rgba(147, 0, 1, 0.6),
+    0 0 20px rgba(147, 0, 1, 0.4),
+    0 0 30px rgba(147, 0, 1, 0.2);
+}
+
+/* Data stream animation */
+.data-stream {
+  animation: dataStream 20s linear infinite;
+}
+
+@keyframes dataStream {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100vw); }
+}
+
+/* Pulse animation for status indicators */
+.cyber-pulse {
+  animation: cyberPulse 2s ease-in-out infinite;
+}
+
+@keyframes cyberPulse {
+  0%, 100% { 
+    opacity: 1; 
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.6; 
+    transform: scale(1.1);
+  }
+}
+
+/* Modern button hover */
+.cyber-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cyber-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.cyber-button:hover::before {
+  left: 100%;
+}
+
+/* Dark grid pattern overlay */
+.cyber-grid {
+  background-color: #000000 !important;
+  background-image: 
+    linear-gradient(rgba(147, 0, 1, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(147, 0, 1, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Scanning line effect with dark maroon */
+.scan-line {
+  position: relative;
+  overflow: hidden;
+}
+
+.scan-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(147, 0, 1, 0.8), transparent);
+  animation: scanLine 3s ease-in-out infinite;
+}
+
+@keyframes scanLine {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: 100%; }
+}
+
+/* Spotlight Slider Styles */
+.spotlight-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  border-radius: 4px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.spotlight-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #ffd700, #ffb347);
+  border: 2px solid #333;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5), inset 0 1px 3px rgba(255, 255, 255, 0.3);
+  transition: all 0.2s ease;
+}
+
+.spotlight-slider::-webkit-slider-thumb:hover {
+  background: linear-gradient(145deg, #ffed4a, #ffd700);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.8), inset 0 1px 3px rgba(255, 255, 255, 0.5);
+  transform: scale(1.1);
+}
+
+.spotlight-slider::-webkit-slider-thumb:active {
+  background: linear-gradient(145deg, #fff200, #ffd700);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 1), inset 0 1px 3px rgba(255, 255, 255, 0.7);
+  transform: scale(1.2);
+}
+
+.spotlight-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #ffd700, #ffb347);
+  border: 2px solid #333;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5), inset 0 1px 3px rgba(255, 255, 255, 0.3);
+  transition: all 0.2s ease;
+}
+
+.spotlight-slider::-moz-range-thumb:hover {
+  background: linear-gradient(145deg, #ffed4a, #ffd700);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.8), inset 0 1px 3px rgba(255, 255, 255, 0.5);
+  transform: scale(1.1);
+}
+
+.spotlight-slider:focus {
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
+}
