@@ -234,3 +234,7 @@ ENV/
 production.log
 error.log
 access.log
+
+# Environment variables (contains sensitive information)
+.env
+# Keep .env.example for reference

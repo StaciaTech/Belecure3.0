@@ -1,4 +1,28 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+// Environment-based configuration with smart defaults
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+const PYTHON_API_URL = import.meta.env.VITE_PYTHON_API_URL || 'http://localhost:5000';
+const API_TIMEOUT = parseInt(import.meta.env.VITE_API_TIMEOUT || '30000');
+const API_RETRY_ATTEMPTS = parseInt(import.meta.env.VITE_API_RETRY_ATTEMPTS || '3');
+const API_RETRY_DELAY = parseInt(import.meta.env.VITE_API_RETRY_DELAY || '1000');
+
+// Debug configuration
+const DEBUG_ENABLED = import.meta.env.VITE_DEBUG === 'true';
+const IS_DEVELOPMENT = import.meta.env.VITE_APP_ENV === 'development';
+
+// Feature flags with smart defaults
+const FEATURES = {
+  AI_ANALYSIS: import.meta.env.VITE_ENABLE_AI_ANALYSIS !== 'false', // Enabled by default
+  ANALYTICS: import.meta.env.VITE_ENABLE_ANALYTICS === 'true',
+  ERROR_REPORTING: import.meta.env.VITE_ENABLE_ERROR_REPORTING === 'true'
+};
+
+// Simple logging utility
+const log = {
+  debug: (...args: any[]) => (DEBUG_ENABLED || IS_DEVELOPMENT) && console.log('[API Debug]', ...args),
+  info: (...args: any[]) => (DEBUG_ENABLED || IS_DEVELOPMENT) && console.info('[API Info]', ...args),
+  warn: (...args: any[]) => console.warn('[API Warn]', ...args),
+  error: (...args: any[]) => console.error('[API Error]', ...args)
+};
 
 export interface Project {
   id: string;
@@ -156,18 +180,44 @@ class ApiService {
       ...options,
     };
 
+    log.debug(`Making request to: ${url}`);
+
     try {
-      const response = await fetch(url, config);
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), API_TIMEOUT);
+      
+      const response = await fetch(url, {
+        ...config,
+        signal: controller.signal
+      });
+      
+      clearTimeout(timeoutId);
+      
       const data = await response.json();
       
       if (!response.ok) {
         throw new Error(data.message || `HTTP error! status: ${response.status}`);
       }
       
+      log.info(`Request successful: ${endpoint}`);
       return data;
+      
     } catch (error) {
-      console.error('API request failed:', error);
+      log.error(`Request failed: ${endpoint}`, error);
+      
+      if (FEATURES.ERROR_REPORTING) {
+        // Report error to monitoring service if enabled
+        this.reportError(endpoint, error as Error);
+      }
+      
       throw error;
+    }
+  }
+
+  private reportError(endpoint: string, error: Error) {
+    // Simple error reporting - can be extended with Sentry, etc.
+    if (FEATURES.ERROR_REPORTING) {
+      log.debug('Error reported:', { endpoint, error: error.message });
     }
   }
 
@@ -183,6 +233,8 @@ class ApiService {
 
     const url = `${API_BASE_URL}/floorplan/analyze`;
     
+    log.info('Starting floor plan analysis', { filename: file.name, size: file.size });
+    
     try {
       const response = await fetch(url, {
         method: 'POST',
@@ -195,9 +247,15 @@ class ApiService {
         throw new Error(data.message || `Analysis failed: ${response.status}`);
       }
       
+      log.info('Floor plan analysis completed successfully');
       return data;
     } catch (error) {
-      console.error('Floor plan analysis failed:', error);
+      log.error('Floor plan analysis failed:', error);
+      
+      if (FEATURES.ERROR_REPORTING) {
+        this.reportError('/floorplan/analyze', error as Error);
+      }
+      
       throw error;
     }
   }
@@ -219,6 +277,8 @@ class ApiService {
 
     const url = `${API_BASE_URL}/floorplan/analyze-region`;
     
+    log.info('Starting region analysis', { regionId, regionType });
+    
     try {
       const response = await fetch(url, {
         method: 'POST',
@@ -231,17 +291,33 @@ class ApiService {
         throw new Error(data.message || `Region analysis failed: ${response.status}`);
       }
       
+      log.info('Region analysis completed successfully');
       return data;
     } catch (error) {
-      console.error('Floor plan region analysis failed:', error);
+      log.error('Floor plan region analysis failed:', error);
+      
+      if (FEATURES.ERROR_REPORTING) {
+        this.reportError('/floorplan/analyze-region', error as Error);
+      }
+      
       throw error;
     }
   }
 
   async getAIHealth(): Promise<AIHealthResponse> {
-    const url = `${API_BASE_URL}/floorplan/health`;
-    const response = await fetch(url);
-    return response.json();
+    log.debug('Checking AI service health');
+    
+    try {
+      const url = `${API_BASE_URL}/floorplan/health`;
+      const response = await fetch(url);
+      const data = await response.json();
+      
+      log.info('AI health check completed', { status: data.overall });
+      return data;
+    } catch (error) {
+      log.warn('AI health check failed:', error);
+      throw error;
+    }
   }
 
   async getAIMetrics(): Promise<ApiResponse<any>> {

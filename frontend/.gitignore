@@ -9,13 +9,18 @@ node_modules/
 dist/
 build/
 
-# Environment Files
+# Environment Files (contains sensitive information)
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
-.env.production
+
+# Keep environment examples and specific environment files for deployment
+# .env.example (template file)
+# .env.development (dev settings)
+# .env.staging (staging settings)  
+# .env.production (prod settings)
 
 # Logs
 npm-debug.log*
