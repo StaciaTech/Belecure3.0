@@ -127,6 +127,7 @@ zipp==3.4.1
 gunicorn==20.1.0
 psutil==5.8.0
 gevent==21.8.0
+python-dotenv==0.19.2
 
 # Optional: For advanced monitoring and logging
 # prometheus-flask-exporter==0.18.2

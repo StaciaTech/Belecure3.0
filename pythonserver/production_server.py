@@ -9,9 +9,17 @@ import sys
 import warnings
 import logging
 
-# Configure environment first
-os.environ['FLASK_ENV'] = 'production'
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  # Suppress TensorFlow warnings
+# Load environment variables first
+try:
+    from dotenv import load_dotenv
+    load_dotenv()  # Load .env file if it exists
+    print("✅ Environment variables loaded from .env file")
+except ImportError:
+    print("⚠️  python-dotenv not installed. Using system environment variables only.")
+
+# Configure environment (with fallbacks)
+os.environ['FLASK_ENV'] = os.getenv('FLASK_ENV', 'production')
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = os.getenv('TF_CPP_MIN_LOG_LEVEL', '2')
 
 # Suppress specific warnings
 warnings.filterwarnings('ignore', category=DeprecationWarning)

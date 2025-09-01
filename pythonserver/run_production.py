@@ -10,6 +10,13 @@ import warnings
 import logging
 from io import StringIO
 
+# Load environment variables first
+try:
+    from dotenv import load_dotenv
+    load_dotenv()  # Load .env file if it exists
+except ImportError:
+    pass  # python-dotenv not installed, use system env vars only
+
 # Suppress Flask development warnings
 warnings.filterwarnings('ignore', message='This is a development server.*')
 warnings.filterwarnings('ignore', category=UserWarning, module='flask')
@@ -29,8 +36,8 @@ class WarningFilter:
         self.stderr.flush()
 
 # Set production environment
-os.environ['FLASK_ENV'] = 'production'
-os.environ['WERKZEUG_RUN_MAIN'] = 'true'
+os.environ['FLASK_ENV'] = os.getenv('FLASK_ENV', 'production')
+os.environ['WERKZEUG_RUN_MAIN'] = os.getenv('WERKZEUG_RUN_MAIN', 'true')
 
 # Redirect stderr to filter warnings
 sys.stderr = WarningFilter()

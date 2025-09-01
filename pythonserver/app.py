@@ -18,34 +18,59 @@ from flask_cors import CORS
 from werkzeug.utils import secure_filename
 import skimage.color
 
+# Load environment variables
+try:
+    from dotenv import load_dotenv
+    load_dotenv()  # Load .env file if it exists
+except ImportError:
+    logger.warning("python-dotenv not installed. Using system environment variables only.")
+
 # Import Mask R-CNN components
 from mrcnn.config import Config
 from mrcnn.model import MaskRCNN, mold_image
 
-# Configure logging
+# Configure logging with environment variable support
+log_level = getattr(logging, os.getenv('LOG_LEVEL', 'INFO').upper(), logging.INFO)
 logging.basicConfig(
-    level=logging.INFO,
+    level=log_level,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('app.log'),
+        logging.FileHandler(os.getenv('APP_LOG', 'app.log')),
         logging.StreamHandler(sys.stdout)
     ]
 )
 logger = logging.getLogger(__name__)
 
-# Configuration
+# Configuration class with environment variable support
 class AppConfig:
-    MAX_CONTENT_LENGTH = 50 * 1024 * 1024  # 50MB max file size
-    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp', 'pdf'}
-    WEIGHTS_FOLDER = "./weights"
-    WEIGHTS_FILE_NAME = 'maskrcnn_15_epochs.h5'
-    MODEL_NAME = "mask_rcnn_hq"
-    REQUEST_TIMEOUT = 300  # 5 minutes
-    MEMORY_THRESHOLD_MB = 4096  # Alert if memory usage exceeds 4GB
-    # Production Flask settings
-    ENV = 'production'
-    DEBUG = False
-    TESTING = False
+    # File upload settings
+    MAX_CONTENT_LENGTH = int(os.getenv('MAX_CONTENT_LENGTH', 50 * 1024 * 1024))  # 50MB default
+    ALLOWED_EXTENSIONS = set(os.getenv('ALLOWED_EXTENSIONS', 'png,jpg,jpeg,gif,webp,pdf').split(','))
+    
+    # Model settings
+    WEIGHTS_FOLDER = os.getenv('WEIGHTS_FOLDER', './weights')
+    WEIGHTS_FILE_NAME = os.getenv('WEIGHTS_FILE_NAME', 'maskrcnn_15_epochs.h5')
+    MODEL_NAME = os.getenv('MODEL_NAME', 'mask_rcnn_hq')
+    
+    # Performance settings
+    REQUEST_TIMEOUT = int(os.getenv('REQUEST_TIMEOUT', 300))  # 5 minutes default
+    MEMORY_THRESHOLD_MB = int(os.getenv('MEMORY_THRESHOLD_MB', 4096))  # 4GB default
+    
+    # Flask settings
+    ENV = os.getenv('FLASK_ENV', 'production')
+    DEBUG = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
+    TESTING = os.getenv('FLASK_TESTING', 'False').lower() == 'true'
+    
+    # Server settings
+    HOST = os.getenv('HOST', '0.0.0.0')
+    PORT = int(os.getenv('PORT', 5000))
+    
+    # CORS settings
+    CORS_ORIGINS = os.getenv('CORS_ORIGINS', '*')
+    
+    # Logging settings
+    LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO').upper()
+    APP_LOG = os.getenv('APP_LOG', 'app.log')
 
 class PredictionConfig(Config):
     NAME = "floorPlan_cfg"
@@ -130,15 +155,22 @@ class MemoryMonitor:
 
 memory_monitor = MemoryMonitor()
 
-# Flask app setup with production configuration
+# Flask app setup with environment configuration
 app = Flask(__name__)
 app.config.from_object(AppConfig)
 
-# Set production environment
-os.environ['FLASK_ENV'] = 'production'
-app.env = 'production'
+# Set environment from config
+os.environ['FLASK_ENV'] = AppConfig.ENV
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = os.getenv('TF_CPP_MIN_LOG_LEVEL', '2')
+app.env = AppConfig.ENV
 
-CORS(app, resources={r"/*": {"origins": "*"}})
+# Configure CORS with environment variable support
+cors_origins = AppConfig.CORS_ORIGINS
+if cors_origins == '*':
+    CORS(app, resources={r"/*": {"origins": "*"}})
+else:
+    origins_list = [origin.strip() for origin in cors_origins.split(',')]
+    CORS(app, resources={r"/*": {"origins": origins_list}})
 
 # Suppress Flask development server warning
 import logging

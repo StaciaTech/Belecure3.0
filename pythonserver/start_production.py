@@ -12,6 +12,14 @@ import subprocess
 import logging
 from pathlib import Path
 
+# Load environment variables first
+try:
+    from dotenv import load_dotenv
+    load_dotenv()  # Load .env file if it exists
+    print("✅ Environment variables loaded from .env file")
+except ImportError:
+    print("⚠️  python-dotenv not installed. Using system environment variables only.")
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
