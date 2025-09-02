@@ -1,5 +1,6 @@
 import React from 'react';
-import { Search, Activity, Settings, User } from 'lucide-react';
+import { Search, Settings, User } from 'lucide-react';
+import HeaderSystemStatus from './HeaderSystemStatus';
 
 const Header = () => {
   return (
@@ -42,11 +43,7 @@ const Header = () => {
         {/* Right Actions */}
         <div className="flex items-center space-x-4">
           {/* System Status */}
-          <div className="flex items-center space-x-2 px-4 py-2 cyber-card-light rounded-xl">
-            <Activity className="w-4 h-4 text-emerald-400" />
-            <span className="text-xs font-semibold text-emerald-400">ONLINE</span>
-            <div className="w-2 h-2 bg-emerald-400 rounded-full cyber-pulse"></div>
-          </div>
+          <HeaderSystemStatus />
 
           {/* Settings */}
           <button className="p-3 text-red-200/70 hover:text-red-200 hover:bg-red-900/10 rounded-xl transition-all duration-300 cyber-hover">

@@ -102,7 +102,10 @@ dist
 
 # Gatsby files
 .cache/
-public
+# public - Allow frontend public directory with fonts and assets
+# Only ignore specific public directories if needed
+backend/public/
+pythonserver/public/
 
 # Storybook build outputs
 .out
@@ -224,6 +227,25 @@ production.log
 app.log
 monitor.log
 backups/
+
+# Fonts and Assets - ALLOW these in repository
+!frontend/public/
+!frontend/public/**/*.ttf
+!frontend/public/**/*.otf  
+!frontend/public/**/*.woff
+!frontend/public/**/*.woff2
+!frontend/public/**/*.eot
+!**/fonts/**/*.ttf
+!**/fonts/**/*.otf
+!**/fonts/**/*.woff
+!**/fonts/**/*.woff2
+!**/assets/**/*.ttf
+!**/assets/**/*.otf
+!**/assets/**/*.woff
+!**/assets/**/*.woff2
+# Specifically allow Bitcount and other custom fonts
+!**/Bitcount*/**
+!**/Mozilla_Headline/**
 
 # PM2 Files
 .pm2/
