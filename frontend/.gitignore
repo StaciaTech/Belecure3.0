@@ -139,7 +139,7 @@ dist
 .cache/
 # Comment in the public line in if your project uses Gatsby and not Next.js
 # https://nextjs.org/docs/api-reference/next.config.js/cdn-support-with-asset-prefix
-# public
+# public - KEEP COMMENTED to allow fonts and assets in public directory
 
 # Storybook build outputs
 .out
@@ -157,3 +157,24 @@ temp/
 
 # Turbo
 .turbo
+
+# ============================================================================
+# FONTS AND ASSETS - EXPLICITLY ALLOWED
+# ============================================================================
+# Allow all font files in public directory
+!public/
+!public/**/*.ttf
+!public/**/*.otf
+!public/**/*.woff
+!public/**/*.woff2
+!public/**/*.eot
+
+# Specifically allow custom fonts
+!public/Bitcount*/**
+!public/Mozilla_Headline/**
+!public/**/fonts/**
+
+# Allow other assets
+!public/**/*.json
+!public/**/*.obj
+!public/**/*.mtl

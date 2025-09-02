@@ -1,0 +1,1302 @@
+{
+  "lightFixtures": {
+    "categories": {
+      "spotLights": {
+        "name": "Spot Lights",
+        "description": "Directional lighting fixtures for accent and task lighting",
+        "color": "#FF00FF",
+        "fixtures": [
+          {
+            "type": "spot-type1",
+            "label": "Spot Type 1",
+            "description": "Basic spot light with double circle design",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "circle",
+                  "attributes": {
+                    "cx": "12",
+                    "cy": "12",
+                    "r": "8",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "1",
+                    "fill": "none"
+                  }
+                },
+                {
+                  "type": "circle",
+                  "attributes": {
+                    "cx": "12",
+                    "cy": "12",
+                    "r": "5",
+                    "fill": "#FF00FF",
+                    "stroke": "none"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "spot-type2",
+            "label": "Spot Type 2",
+            "description": "Spot light with thick outer ring",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "circle",
+                  "attributes": {
+                    "cx": "12",
+                    "cy": "12",
+                    "r": "9",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "4",
+                    "fill": "none"
+                  }
+                },
+                {
+                  "type": "circle",
+                  "attributes": {
+                    "cx": "12",
+                    "cy": "12",
+                    "r": "4",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "1",
+                    "fill": "none"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "spot-type3",
+            "label": "Spot Type 3",
+            "description": "Simple spot light with single thick ring",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "circle",
+                  "attributes": {
+                    "cx": "12",
+                    "cy": "12",
+                    "r": "8",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "4",
+                    "fill": "none"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "spot-type4",
+            "label": "Spot Type 4",
+            "description": "Spot light with medium outer ring and inner circle",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "circle",
+                  "attributes": {
+                    "cx": "12",
+                    "cy": "12",
+                    "r": "9",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "3",
+                    "fill": "none"
+                  }
+                },
+                {
+                  "type": "circle",
+                  "attributes": {
+                    "cx": "12",
+                    "cy": "12",
+                    "r": "4",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "1",
+                    "fill": "none"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "adjustable-spot-type6",
+            "label": "Adjustable Spot",
+            "description": "Adjustable spot light with half-filled design",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "defs",
+                  "elements": [
+                    {
+                      "type": "clipPath",
+                      "attributes": {
+                        "id": "adjustable-spot-clip"
+                      },
+                      "elements": [
+                        {
+                          "type": "rect",
+                          "attributes": {
+                            "x": "0",
+                            "y": "0",
+                            "width": "12",
+                            "height": "24"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "path",
+                  "attributes": {
+                    "d": "M12 2 A10 10 0 0 0 2 12 H 22 A10 10 0 0 0 12 2Z",
+                    "fill": "#FF00FF"
+                  }
+                },
+                {
+                  "type": "path",
+                  "attributes": {
+                    "d": "M12 2 A10 10 0 0 0 2 12 H 22 A10 10 0 0 0 12 2Z",
+                    "fill": "black",
+                    "clipPath": "url(#adjustable-spot-clip)"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "mini-spot",
+            "label": "Mini Spot",
+            "description": "Small spot light with compact design",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "circle",
+                  "attributes": {
+                    "cx": "12",
+                    "cy": "12",
+                    "r": "6",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "3",
+                    "fill": "none"
+                  }
+                },
+                {
+                  "type": "circle",
+                  "attributes": {
+                    "cx": "12",
+                    "cy": "12",
+                    "r": "2",
+                    "fill": "#FF00FF"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "bed-reading-spot",
+            "label": "Bed Reading Spot",
+            "description": "Specialized reading light for bedrooms",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "circle",
+                  "attributes": {
+                    "cx": "12",
+                    "cy": "12",
+                    "r": "7",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "3",
+                    "fill": "none"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "waterproof-spot",
+            "label": "Waterproof Spot",
+            "description": "Water-resistant spot light with hatched pattern",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "defs",
+                  "elements": [
+                    {
+                      "type": "pattern",
+                      "attributes": {
+                        "id": "waterproof-hatch",
+                        "patternUnits": "userSpaceOnUse",
+                        "width": "4",
+                        "height": "4"
+                      },
+                      "elements": [
+                        {
+                          "type": "path",
+                          "attributes": {
+                            "d": "M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2",
+                            "stroke": "#FF00FF",
+                            "strokeWidth": "1"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "circle",
+                  "attributes": {
+                    "cx": "12",
+                    "cy": "12",
+                    "r": "9",
+                    "fill": "url(#waterproof-hatch)"
+                  }
+                },
+                {
+                  "type": "circle",
+                  "attributes": {
+                    "cx": "12",
+                    "cy": "12",
+                    "r": "9",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "1.5",
+                    "fill": "none"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "gimbel-spot",
+            "label": "Gimbel Spot",
+            "description": "Adjustable gimbel-mounted spot light",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "circle",
+                  "attributes": {
+                    "cx": "12",
+                    "cy": "12",
+                    "r": "8",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "2",
+                    "fill": "none"
+                  }
+                },
+                {
+                  "type": "circle",
+                  "attributes": {
+                    "cx": "12",
+                    "cy": "12",
+                    "r": "4",
+                    "fill": "#FF00FF"
+                  }
+                },
+                {
+                  "type": "line",
+                  "attributes": {
+                    "x1": "4",
+                    "y1": "12",
+                    "x2": "20",
+                    "y2": "12",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "1"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "surface-spot-light-indoor",
+            "label": "Surface Spot",
+            "description": "Surface-mounted indoor spot light",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "circle",
+                  "attributes": {
+                    "cx": "12",
+                    "cy": "12",
+                    "r": "8",
+                    "fill": "#FF00FF"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "surface-spot-light-indoor-2",
+            "label": "Surface Spot 2",
+            "description": "Alternative surface-mounted indoor spot light",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "circle",
+                  "attributes": {
+                    "cx": "12",
+                    "cy": "12",
+                    "r": "8",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "2",
+                    "fill": "none"
+                  }
+                },
+                {
+                  "type": "circle",
+                  "attributes": {
+                    "cx": "12",
+                    "cy": "12",
+                    "r": "4",
+                    "fill": "#FF00FF"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "downlight",
+            "label": "Downlight",
+            "description": "Recessed ceiling downlight",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "circle",
+                  "attributes": {
+                    "cx": "12",
+                    "cy": "12",
+                    "r": "8",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "1.5",
+                    "fill": "none"
+                  }
+                },
+                {
+                  "type": "circle",
+                  "attributes": {
+                    "cx": "12",
+                    "cy": "12",
+                    "r": "5",
+                    "fill": "#FF00FF"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "wallWashers": {
+        "name": "Wall Washers",
+        "description": "Fixtures designed to wash walls with even light distribution",
+        "color": "#FF00FF",
+        "fixtures": [
+          {
+            "type": "spot-type5-wall-washer",
+            "label": "Wall Washer",
+            "description": "Asymmetric wall washing fixture",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "path",
+                  "attributes": {
+                    "d": "M12 2C6.48 2 2 6.48 2 12H22C22 6.48 17.52 2 12 2Z",
+                    "fill": "#FF00FF"
+                  }
+                },
+                {
+                  "type": "path",
+                  "attributes": {
+                    "d": "M2 12V20C2 21.1 2.9 22 4 22H20C21.1 22 22 21.1 22 20V12H2Z",
+                    "fill": "black"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "wall-washer-spot",
+            "label": "Wall Washer Spot",
+            "description": "Directional wall washer with spot design",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "path",
+                  "attributes": {
+                    "d": "M12 2 A10 10 0 0 0 2 12 H22 A10 10 0 0 0 12 2Z",
+                    "fill": "black"
+                  }
+                },
+                {
+                  "type": "path",
+                  "attributes": {
+                    "d": "M12 2 A10 10 0 0 0 2 12",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "1.5",
+                    "fill": "none"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "linearLights": {
+        "name": "Linear Lights",
+        "description": "Continuous linear lighting solutions",
+        "color": "#FF00FF",
+        "fixtures": [
+          {
+            "type": "laser-blade",
+            "label": "Laser Blade",
+            "description": "Thin linear LED light strip",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "rect",
+                  "attributes": {
+                    "x": "2",
+                    "y": "8",
+                    "width": "20",
+                    "height": "8",
+                    "fill": "black",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "1"
+                  }
+                },
+                {
+                  "type": "line",
+                  "attributes": {
+                    "x1": "4",
+                    "y1": "12",
+                    "x2": "20",
+                    "y2": "12",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "1.5"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "linear-wall-washer",
+            "label": "Linear Wall Washer",
+            "description": "Linear fixture for wall washing applications",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "rect",
+                  "attributes": {
+                    "x": "4",
+                    "y": "10",
+                    "width": "16",
+                    "height": "4",
+                    "fill": "black",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "1.5"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "linear-profile-lighting",
+            "label": "Linear Profile",
+            "description": "Architectural profile linear lighting",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "rect",
+                  "attributes": {
+                    "x": "2",
+                    "y": "11",
+                    "width": "20",
+                    "height": "2",
+                    "fill": "#FF00FF"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "indoor-strip-light",
+            "label": "Indoor Strip",
+            "description": "Flexible indoor LED strip light",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "line",
+                  "attributes": {
+                    "x1": "12",
+                    "y1": "4",
+                    "x2": "12",
+                    "y2": "20",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "3",
+                    "strokeDasharray": "4 2"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "curtain-grazer",
+            "label": "Curtain Grazer",
+            "description": "Linear light for curtain grazing effects",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "line",
+                  "attributes": {
+                    "x1": "12",
+                    "y1": "4",
+                    "x2": "12",
+                    "y2": "20",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "3"
+                  }
+                },
+                {
+                  "type": "line",
+                  "attributes": {
+                    "x1": "10",
+                    "y1": "4",
+                    "x2": "10",
+                    "y2": "20",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "1"
+                  }
+                },
+                {
+                  "type": "line",
+                  "attributes": {
+                    "x1": "14",
+                    "y1": "4",
+                    "x2": "14",
+                    "y2": "20",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "1"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "outdoor-profile",
+            "label": "Outdoor Profile",
+            "description": "Weather-resistant outdoor linear profile",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "line",
+                  "attributes": {
+                    "x1": "12",
+                    "y1": "4",
+                    "x2": "12",
+                    "y2": "20",
+                    "stroke": "red",
+                    "strokeWidth": "3",
+                    "strokeDasharray": "4 2"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "dining-linear-pendant",
+            "label": "Dining Linear Pendant",
+            "description": "Suspended linear light for dining areas",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "rect",
+                  "attributes": {
+                    "x": "2",
+                    "y": "10",
+                    "width": "20",
+                    "height": "4",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "1",
+                    "fill": "none"
+                  }
+                },
+                {
+                  "type": "rect",
+                  "attributes": {
+                    "x": "3",
+                    "y": "11",
+                    "width": "18",
+                    "height": "2",
+                    "fill": "#FF00FF"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "magneticTrack": {
+        "name": "Magnetic Track Systems",
+        "description": "Modular magnetic track lighting systems",
+        "color": "#8B0000",
+        "fixtures": [
+          {
+            "type": "magnetic-track",
+            "label": "Magnetic Track",
+            "description": "Base magnetic track system",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "rect",
+                  "attributes": {
+                    "x": "2",
+                    "y": "10",
+                    "width": "20",
+                    "height": "4",
+                    "fill": "#333",
+                    "stroke": "#555",
+                    "strokeWidth": "1"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "track-spot",
+            "label": "Track Spot",
+            "description": "Spot lights mounted on track system",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "rect",
+                  "attributes": {
+                    "x": "2",
+                    "y": "10",
+                    "width": "20",
+                    "height": "4",
+                    "fill": "#333"
+                  }
+                },
+                {
+                  "type": "circle",
+                  "attributes": {
+                    "cx": "8",
+                    "cy": "12",
+                    "r": "3",
+                    "fill": "#FF00FF"
+                  }
+                },
+                {
+                  "type": "circle",
+                  "attributes": {
+                    "cx": "16",
+                    "cy": "12",
+                    "r": "3",
+                    "fill": "#FF00FF"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "track-spot-2",
+            "label": "Track Spot 2",
+            "description": "Alternative track-mounted spot design",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "rect",
+                  "attributes": {
+                    "x": "2",
+                    "y": "10",
+                    "width": "20",
+                    "height": "4",
+                    "fill": "#333"
+                  }
+                },
+                {
+                  "type": "rect",
+                  "attributes": {
+                    "x": "6",
+                    "y": "8",
+                    "width": "4",
+                    "height": "8",
+                    "fill": "#FF00FF"
+                  }
+                },
+                {
+                  "type": "rect",
+                  "attributes": {
+                    "x": "14",
+                    "y": "8",
+                    "width": "4",
+                    "height": "8",
+                    "fill": "#FF00FF"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "magnetic-laser-blade",
+            "label": "Magnetic Laser Blade",
+            "description": "Magnetic track-mounted laser blade",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "rect",
+                  "attributes": {
+                    "x": "2",
+                    "y": "8",
+                    "width": "20",
+                    "height": "8",
+                    "fill": "#8B0000",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "1"
+                  }
+                },
+                {
+                  "type": "line",
+                  "attributes": {
+                    "x1": "4",
+                    "y1": "12",
+                    "x2": "20",
+                    "y2": "12",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "1.5"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "magnetic-laser-blade-large",
+            "label": "Magnetic Laser Blade Large",
+            "description": "Large magnetic track-mounted laser blade",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "rect",
+                  "attributes": {
+                    "x": "1",
+                    "y": "7",
+                    "width": "22",
+                    "height": "10",
+                    "fill": "#8B0000",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "1"
+                  }
+                },
+                {
+                  "type": "line",
+                  "attributes": {
+                    "x1": "3",
+                    "y1": "12",
+                    "x2": "21",
+                    "y2": "12",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "2"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "magnetic-profile",
+            "label": "Magnetic Profile",
+            "description": "Magnetic track profile light",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "rect",
+                  "attributes": {
+                    "x": "2",
+                    "y": "11",
+                    "width": "20",
+                    "height": "2",
+                    "fill": "#8B0000"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "magnetic-profile-large",
+            "label": "Magnetic Profile Large",
+            "description": "Large magnetic track profile light",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "rect",
+                  "attributes": {
+                    "x": "1",
+                    "y": "10",
+                    "width": "22",
+                    "height": "5",
+                    "fill": "#8B0000"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "magnetic-profile-adjustable",
+            "label": "Magnetic Profile Adjustable",
+            "description": "Adjustable magnetic profile light",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "path",
+                  "attributes": {
+                    "d": "M4 8 L 4 18 L 20 18 L 20 8",
+                    "stroke": "#8B0000",
+                    "strokeWidth": "2",
+                    "fill": "none"
+                  }
+                },
+                {
+                  "type": "rect",
+                  "attributes": {
+                    "x": "6",
+                    "y": "9",
+                    "width": "12",
+                    "height": "4",
+                    "fill": "#8B0000"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "magnetic-profile-adjustable-large",
+            "label": "Magnetic Profile Adjustable Large",
+            "description": "Large adjustable magnetic profile light",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "path",
+                  "attributes": {
+                    "d": "M2 7 L 2 19 L 22 19 L 22 7",
+                    "stroke": "#8B0000",
+                    "strokeWidth": "2",
+                    "fill": "none"
+                  }
+                },
+                {
+                  "type": "rect",
+                  "attributes": {
+                    "x": "4",
+                    "y": "9",
+                    "width": "16",
+                    "height": "5",
+                    "fill": "#8B0000"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "specialtyLights": {
+        "name": "Specialty Lights",
+        "description": "Specialized lighting fixtures for unique applications",
+        "color": "#FF00FF",
+        "fixtures": [
+          {
+            "type": "surface-panel",
+            "label": "Surface Panel",
+            "description": "Surface-mounted panel light",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "defs",
+                  "elements": [
+                    {
+                      "type": "clipPath",
+                      "attributes": {
+                        "id": "surface-panel-clip"
+                      },
+                      "elements": [
+                        {
+                          "type": "rect",
+                          "attributes": {
+                            "x": "10",
+                            "y": "0",
+                            "width": "4",
+                            "height": "24"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "circle",
+                  "attributes": {
+                    "cx": "12",
+                    "cy": "12",
+                    "r": "9",
+                    "fill": "#FF00FF"
+                  }
+                },
+                {
+                  "type": "circle",
+                  "attributes": {
+                    "cx": "12",
+                    "cy": "12",
+                    "r": "9",
+                    "fill": "#FF00FF",
+                    "clipPath": "url(#surface-panel-clip)"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "stretch-ceiling",
+            "label": "Stretch Ceiling",
+            "description": "Integrated stretch ceiling lighting",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "defs",
+                  "elements": [
+                    {
+                      "type": "linearGradient",
+                      "attributes": {
+                        "id": "stretch-grad",
+                        "x1": "0%",
+                        "y1": "0%",
+                        "x2": "100%",
+                        "y2": "0%"
+                      },
+                      "elements": [
+                        {
+                          "type": "stop",
+                          "attributes": {
+                            "offset": "0%",
+                            "stopColor": "#FF00FF",
+                            "stopOpacity": "0.3"
+                          }
+                        },
+                        {
+                          "type": "stop",
+                          "attributes": {
+                            "offset": "50%",
+                            "stopColor": "#FF00FF",
+                            "stopOpacity": "1"
+                          }
+                        },
+                        {
+                          "type": "stop",
+                          "attributes": {
+                            "offset": "100%",
+                            "stopColor": "#FF00FF",
+                            "stopOpacity": "0.3"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "g",
+                  "attributes": {
+                    "stroke": "url(#stretch-grad)",
+                    "strokeWidth": "1.5"
+                  },
+                  "elements": [
+                    {
+                      "type": "path",
+                      "attributes": {
+                        "d": "M4 4 V 20 M6 4 V 20 M8 4 V 20 M10 4 V 20 M12 4 V 20 M14 4 V 20 M16 4 V 20 M18 4 V 20 M20 4 V 20"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "type": "module-signage",
+            "label": "Module Signage",
+            "description": "Modular signage lighting system",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "g",
+                  "attributes": {
+                    "stroke": "#4299e1",
+                    "strokeWidth": "1"
+                  },
+                  "elements": [
+                    {
+                      "type": "path",
+                      "attributes": {
+                        "d": "M6 5 V 19 M9 5 V 19 M12 5 V 19 M15 5 V 19 M18 5 V 19"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "attributes": {
+                        "d": "M6 8 H 18 M6 12 H 18 M6 16 H 18"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "decorativeLights": {
+        "name": "Decorative Lights",
+        "description": "Aesthetic and decorative lighting fixtures",
+        "color": "#0000FF",
+        "fixtures": [
+          {
+            "type": "table-lamp",
+            "label": "Table Lamp",
+            "description": "Portable table lamp",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "path",
+                  "attributes": {
+                    "d": "M6 14 A 6 6 0 0 1 18 14",
+                    "stroke": "#0000FF",
+                    "strokeWidth": "1.5",
+                    "fill": "none"
+                  }
+                },
+                {
+                  "type": "rect",
+                  "attributes": {
+                    "x": "7",
+                    "y": "14",
+                    "width": "10",
+                    "height": "4",
+                    "fill": "#0000FF"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "floor-lamp",
+            "label": "Floor Lamp",
+            "description": "Standing floor lamp",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "path",
+                  "attributes": {
+                    "d": "M8 12 A 4 4 0 0 1 16 12",
+                    "stroke": "#0000FF",
+                    "strokeWidth": "1.5",
+                    "fill": "none"
+                  }
+                },
+                {
+                  "type": "rect",
+                  "attributes": {
+                    "x": "9",
+                    "y": "12",
+                    "width": "6",
+                    "height": "3",
+                    "fill": "#0000FF"
+                  }
+                },
+                {
+                  "type": "rect",
+                  "attributes": {
+                    "x": "11",
+                    "y": "15",
+                    "width": "2",
+                    "height": "5",
+                    "fill": "#0000FF"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "chandelier-2",
+            "label": "Chandelier",
+            "description": "Decorative chandelier fixture",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "circle",
+                  "attributes": {
+                    "cx": "12",
+                    "cy": "12",
+                    "r": "5",
+                    "fill": "#0000FF"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "hanging-light",
+            "label": "Hanging Light",
+            "description": "Suspended decorative light",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "circle",
+                  "attributes": {
+                    "cx": "12",
+                    "cy": "12",
+                    "r": "8",
+                    "fill": "white",
+                    "stroke": "#0000FF",
+                    "strokeWidth": "1"
+                  }
+                },
+                {
+                  "type": "path",
+                  "attributes": {
+                    "d": "M12 4 L12 20 M4 12 L20 12",
+                    "stroke": "#0000FF",
+                    "strokeWidth": "1"
+                  }
+                },
+                {
+                  "type": "path",
+                  "attributes": {
+                    "d": "M12,4 A8,8 0 0,1 20,12 L12,12Z",
+                    "fill": "#0000FF"
+                  }
+                },
+                {
+                  "type": "path",
+                  "attributes": {
+                    "d": "M12,12 A8,8 0 0,1 4,12 L12,12Z",
+                    "fill": "#0000FF"
+                  }
+                },
+                {
+                  "type": "path",
+                  "attributes": {
+                    "d": "M4,12 A8,8 0 0,1 12,20 L12,12Z",
+                    "fill": "#0000FF"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "laserBlades": {
+        "name": "Laser Blade Systems",
+        "description": "High-precision laser blade lighting systems",
+        "color": "#FF00FF",
+        "fixtures": [
+          {
+            "type": "laser-blade-wall-washer",
+            "label": "Laser Blade Wall Washer",
+            "description": "Laser blade specifically for wall washing",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "rect",
+                  "attributes": {
+                    "x": "2",
+                    "y": "8",
+                    "width": "20",
+                    "height": "8",
+                    "fill": "black",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "1"
+                  }
+                },
+                {
+                  "type": "line",
+                  "attributes": {
+                    "x1": "4",
+                    "y1": "12",
+                    "x2": "20",
+                    "y2": "12",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "1.5"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "laser-blade-wall-washer-large",
+            "label": "Laser Blade Wall Washer Large",
+            "description": "Large laser blade for wall washing applications",
+            "svg": {
+              "viewBox": "0 0 24 24",
+              "elements": [
+                {
+                  "type": "rect",
+                  "attributes": {
+                    "x": "1",
+                    "y": "7",
+                    "width": "22",
+                    "height": "10",
+                    "fill": "black",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "1"
+                  }
+                },
+                {
+                  "type": "line",
+                  "attributes": {
+                    "x1": "3",
+                    "y1": "12",
+                    "x2": "21",
+                    "y2": "12",
+                    "stroke": "#FF00FF",
+                    "strokeWidth": "2"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+} 

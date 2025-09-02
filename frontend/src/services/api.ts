@@ -1,6 +1,6 @@
 // Environment-based configuration with smart defaults
+// Frontend connects ONLY to Express backend - never directly to Python server
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
-const PYTHON_API_URL = import.meta.env.VITE_PYTHON_API_URL || 'http://localhost:5000';
 const API_TIMEOUT = parseInt(import.meta.env.VITE_API_TIMEOUT || '30000');
 const API_RETRY_ATTEMPTS = parseInt(import.meta.env.VITE_API_RETRY_ATTEMPTS || '3');
 const API_RETRY_DELAY = parseInt(import.meta.env.VITE_API_RETRY_DELAY || '1000');
@@ -170,7 +170,7 @@ class ApiService {
     endpoint: string,
     options: RequestInit = {}
   ): Promise<ApiResponse<T>> {
-    const url = `${API_BASE_URL}${endpoint}`;
+    const url = `${API_BASE_URL}/api${endpoint}`;
     
     const config: RequestInit = {
       headers: {
@@ -231,7 +231,7 @@ class ApiService {
     const formData = new FormData();
     formData.append('floorplan', file);
 
-    const url = `${API_BASE_URL}/floorplan/analyze`;
+    const url = `${API_BASE_URL}/api/floorplan/analyze`;
     
     log.info('Starting floor plan analysis', { filename: file.name, size: file.size });
     
@@ -275,7 +275,7 @@ class ApiService {
       formData.append('originalCoords', JSON.stringify(originalCoords));
     }
 
-    const url = `${API_BASE_URL}/floorplan/analyze-region`;
+    const url = `${API_BASE_URL}/api/floorplan/analyze-region`;
     
     log.info('Starting region analysis', { regionId, regionType });
     
@@ -308,7 +308,7 @@ class ApiService {
     log.debug('Checking AI service health');
     
     try {
-      const url = `${API_BASE_URL}/floorplan/health`;
+      const url = `${API_BASE_URL}/api/floorplan/health`;
       const response = await fetch(url);
       const data = await response.json();
       
@@ -388,7 +388,7 @@ class ApiService {
   }
 
   async downloadProject(id: string): Promise<Blob> {
-    const url = `${API_BASE_URL}/projects/${id}/download`;
+    const url = `${API_BASE_URL}/api/projects/${id}/download`;
     const response = await fetch(url);
     
     if (!response.ok) {
@@ -401,6 +401,72 @@ class ApiService {
   // System endpoints
   async getSystemInfo(): Promise<ApiResponse<any>> {
     return this.request('/system');
+  }
+
+  // Enhanced system health check with detailed information
+  async getSystemHealth(): Promise<ApiResponse<{
+    overall: 'healthy' | 'degraded' | 'offline';
+    services: {
+      api: { status: string; uptime: number; };
+      database: { status: string; latency?: number; };
+      ai: { status: string; models?: string[]; };
+    };
+    timestamp: string;
+  }>> {
+    try {
+      // Parallel health checks
+      const [healthResponse, aiHealthResponse] = await Promise.allSettled([
+        this.healthCheck(),
+        this.getAIHealth()
+      ]);
+
+      const health = healthResponse.status === 'fulfilled' ? healthResponse.value : null;
+      const aiHealth = aiHealthResponse.status === 'fulfilled' ? aiHealthResponse.value : null;
+
+      // Determine overall status
+      let overall: 'healthy' | 'degraded' | 'offline' = 'offline';
+      if (health?.success && aiHealth?.success) {
+        overall = 'healthy';
+      } else if (health?.success || aiHealth?.success) {
+        overall = 'degraded';
+      }
+
+      return {
+        success: true,
+        data: {
+          overall,
+          services: {
+            api: {
+              status: health?.success ? 'healthy' : 'offline',
+              uptime: health?.data?.uptime || 0
+            },
+            database: {
+              status: health?.success ? 'connected' : 'disconnected'
+            },
+            ai: {
+              status: aiHealth?.services?.pythonAI?.status || 'offline',
+              models: aiHealth?.services?.pythonAI?.details?.models || []
+            }
+          },
+          timestamp: new Date().toISOString()
+        },
+        message: 'System health check completed'
+      };
+    } catch (error) {
+      return {
+        success: false,
+        data: {
+          overall: 'offline' as const,
+          services: {
+            api: { status: 'offline', uptime: 0 },
+            database: { status: 'disconnected' },
+            ai: { status: 'offline' }
+          },
+          timestamp: new Date().toISOString()
+        },
+        message: 'System health check failed'
+      };
+    }
   }
 }
 

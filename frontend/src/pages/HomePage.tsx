@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import UploadArea from '../components/UploadArea';
 import StatsCard from '../components/StatsCard';
 import RecentProjects from '../components/RecentProjects';
+import SystemStatus from '../components/SystemStatus';
 import { Brain, Zap, TrendingUp, Rocket } from 'lucide-react';
 import api, { StatsData } from '../services/api';
 
@@ -133,35 +134,8 @@ const HomePage: React.FC = () => {
           <div className="space-y-8">
             <RecentProjects />
             
-            {/* System Status */}
-            <div className="cyber-card-light border border-red-900/20 rounded-2xl p-6">
-              <h3 className="text-xl font-bold bg-gradient-to-r from-white to-red-200 bg-clip-text text-transparent mb-4">
-                SYSTEM STATUS
-              </h3>
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-300">AI Processing</span>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-emerald-500 rounded-full cyber-pulse"></div>
-                    <span className="text-emerald-400 font-medium">ONLINE</span>
-                  </div>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-300">Database</span>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-emerald-500 rounded-full cyber-pulse"></div>
-                    <span className="text-emerald-400 font-medium">CONNECTED</span>
-                  </div>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-300">API Gateway</span>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-emerald-500 rounded-full cyber-pulse"></div>
-                    <span className="text-emerald-400 font-medium">HEALTHY</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {/* Functional System Status */}
+            <SystemStatus refreshInterval={15000} />
           </div>
         </div>
       </main>
