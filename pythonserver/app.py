@@ -29,48 +29,38 @@ except ImportError:
 from mrcnn.config import Config
 from mrcnn.model import MaskRCNN, mold_image
 
-# Configure logging with environment variable support
+# Configure logging with smart defaults
 log_level = getattr(logging, os.getenv('LOG_LEVEL', 'INFO').upper(), logging.INFO)
 logging.basicConfig(
     level=log_level,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler(os.getenv('APP_LOG', 'app.log')),
+        logging.FileHandler('app.log'),
         logging.StreamHandler(sys.stdout)
     ]
 )
 logger = logging.getLogger(__name__)
 
-# Configuration class with environment variable support
+# Configuration class with smart defaults
 class AppConfig:
-    # File upload settings
-    MAX_CONTENT_LENGTH = int(os.getenv('MAX_CONTENT_LENGTH', 50 * 1024 * 1024))  # 50MB default
-    ALLOWED_EXTENSIONS = set(os.getenv('ALLOWED_EXTENSIONS', 'png,jpg,jpeg,gif,webp,pdf').split(','))
-    
-    # Model settings
-    WEIGHTS_FOLDER = os.getenv('WEIGHTS_FOLDER', './weights')
-    WEIGHTS_FILE_NAME = os.getenv('WEIGHTS_FILE_NAME', 'maskrcnn_15_epochs.h5')
-    MODEL_NAME = os.getenv('MODEL_NAME', 'mask_rcnn_hq')
-    
-    # Performance settings
-    REQUEST_TIMEOUT = int(os.getenv('REQUEST_TIMEOUT', 300))  # 5 minutes default
-    MEMORY_THRESHOLD_MB = int(os.getenv('MEMORY_THRESHOLD_MB', 4096))  # 4GB default
-    
-    # Flask settings
+    # Core settings from environment
     ENV = os.getenv('FLASK_ENV', 'production')
-    DEBUG = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
-    TESTING = os.getenv('FLASK_TESTING', 'False').lower() == 'true'
-    
-    # Server settings
+    DEBUG = ENV == 'development'  # Auto-detect debug mode
     HOST = os.getenv('HOST', '0.0.0.0')
     PORT = int(os.getenv('PORT', 5000))
-    
-    # CORS settings
     CORS_ORIGINS = os.getenv('CORS_ORIGINS', '*')
     
-    # Logging settings
+    # Smart defaults for all other settings
+    MAX_CONTENT_LENGTH = 50 * 1024 * 1024  # 50MB
+    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp', 'pdf'}
+    WEIGHTS_FOLDER = './weights'
+    WEIGHTS_FILE_NAME = 'maskrcnn_15_epochs.h5'
+    MODEL_NAME = 'mask_rcnn_hq'
+    REQUEST_TIMEOUT = 300  # 5 minutes
+    MEMORY_THRESHOLD_MB = 4096  # 4GB
+    TESTING = False
     LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO').upper()
-    APP_LOG = os.getenv('APP_LOG', 'app.log')
+    APP_LOG = 'app.log'
 
 class PredictionConfig(Config):
     NAME = "floorPlan_cfg"
@@ -155,13 +145,13 @@ class MemoryMonitor:
 
 memory_monitor = MemoryMonitor()
 
-# Flask app setup with environment configuration
+# Flask app setup with minimal configuration
 app = Flask(__name__)
 app.config.from_object(AppConfig)
 
-# Set environment from config
+# Set environment
 os.environ['FLASK_ENV'] = AppConfig.ENV
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = os.getenv('TF_CPP_MIN_LOG_LEVEL', '2')
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  # Suppress TensorFlow warnings
 app.env = AppConfig.ENV
 
 # Configure CORS with environment variable support

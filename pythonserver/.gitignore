@@ -238,3 +238,29 @@ access.log
 # Environment variables (contains sensitive information)
 .env
 # Keep .env.example for reference
+
+# Python cache and build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+build/
+dist/
+*.egg-info/
+
+# Log files
+*.log
+app.log
+production.log
+access.log
+error.log
+
+# Test files and directories
+test/
+test_*.py
+*_test.py
+
+# Development and temporary files
+.pytest_cache/
+.coverage
+.DS_Store
+Thumbs.db
