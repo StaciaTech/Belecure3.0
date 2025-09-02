@@ -166,7 +166,7 @@ export interface ApiResponse<T> {
 }
 
 class ApiService {
-  private async request<T>(
+  async request<T>(
     endpoint: string,
     options: RequestInit = {}
   ): Promise<ApiResponse<T>> {
@@ -466,6 +466,16 @@ class ApiService {
         },
         message: 'System health check failed'
       };
+    }
+  }
+
+  // Get real-time memory data for speedometer
+  async getMemoryData(): Promise<ApiResponse<any>> {
+    try {
+      return await this.request('/memory');
+    } catch (error) {
+      console.error('Memory data fetch failed:', error);
+      throw error;
     }
   }
 }

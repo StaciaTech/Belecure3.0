@@ -1,6 +1,7 @@
 import React from 'react';
 import { Search, Settings, User } from 'lucide-react';
 import HeaderSystemStatus from './HeaderSystemStatus';
+import CompactMemorySpeedometer from './CompactMemorySpeedometer';
 
 const Header = () => {
   return (
@@ -44,6 +45,11 @@ const Header = () => {
         <div className="flex items-center space-x-4">
           {/* System Status */}
           <HeaderSystemStatus />
+
+          {/* Memory Speedometer */}
+          <div className="px-3 py-2 bg-gray-900/20 rounded-xl border border-red-900/20">
+            <CompactMemorySpeedometer refreshInterval={5000} size={50} />
+          </div>
 
           {/* Settings */}
           <button className="p-3 text-red-200/70 hover:text-red-200 hover:bg-red-900/10 rounded-xl transition-all duration-300 cyber-hover">
