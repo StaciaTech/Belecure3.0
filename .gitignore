@@ -219,10 +219,10 @@ dmypy.json
 
 # Project Specific
 uploads/
-weights/
-*.h5
-*.hdf5
-*.model
+# weights/ - ALLOW weights directory for LFS tracking
+# *.h5 - ALLOW model files for LFS tracking
+# *.hdf5 - ALLOW model files for LFS tracking  
+# *.model - ALLOW model files for LFS tracking
 production.log
 app.log
 monitor.log
@@ -246,6 +246,15 @@ backups/
 # Specifically allow Bitcount and other custom fonts
 !**/Bitcount*/**
 !**/Mozilla_Headline/**
+
+# AI Models and Weights - ALLOW for LFS tracking
+!pythonserver/weights/
+!pythonserver/weights/**/*.h5
+!pythonserver/weights/**/*.hdf5
+!pythonserver/weights/**/*.model
+!**/*.h5
+!**/*.hdf5
+!**/*.model
 
 # PM2 Files
 .pm2/

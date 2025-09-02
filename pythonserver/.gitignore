@@ -130,10 +130,10 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# TensorFlow/Keras model files
-*.h5
-*.hdf5
-*.model
+# TensorFlow/Keras model files - ALLOW for LFS tracking
+# *.h5 - commented out to allow LFS tracking
+# *.hdf5 - commented out to allow LFS tracking
+# *.model - commented out to allow LFS tracking
 *.pb
 *.ckpt
 *.ckpt.data*
@@ -143,9 +143,12 @@ saved_model/
 model/
 models/
 
-# Model weights directory (but keep structure)
-weights/
-!weights/.gitkeep
+# Model weights directory - ALLOW for LFS tracking
+# weights/ - commented out to allow LFS tracking
+!weights/
+!weights/**/*.h5
+!weights/**/*.hdf5
+!weights/**/*.model
 
 # Logs
 *.log
