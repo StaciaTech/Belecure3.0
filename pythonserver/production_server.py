@@ -30,9 +30,15 @@ warnings.filterwarnings('ignore', message='.*development server.*')
 import tensorflow as tf
 tf.get_logger().setLevel('ERROR')
 
-# Configure logging
+# Configure logging with smart defaults
+log_level_str = os.getenv('LOG_LEVEL', 'info').upper()
+log_level = getattr(logging, log_level_str, logging.INFO)
+
+# Force INFO level minimum for production visibility
+actual_log_level = logging.INFO if log_level > logging.INFO else log_level
+
 logging.basicConfig(
-    level=logging.INFO,
+    level=actual_log_level,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
         logging.FileHandler('production.log'),
@@ -40,9 +46,19 @@ logging.basicConfig(
     ]
 )
 
-# Suppress werkzeug logs
-logging.getLogger('werkzeug').setLevel(logging.WARNING)
-logging.getLogger('tensorflow').setLevel(logging.ERROR)
+print(f"📝 Logging Level: {log_level_str}")
+print(f"🖥️  Console & File Logging: ENABLED")
+
+# Configure component logging - always show Flask requests, hide TF noise
+flask_env = os.getenv('FLASK_ENV', 'production')
+logging.getLogger('werkzeug').setLevel(logging.INFO)  # Show Flask requests
+logging.getLogger('tensorflow').setLevel(logging.ERROR)  # Hide TF warnings
+
+if flask_env == 'development':
+    logging.getLogger('tensorflow').setLevel(logging.WARNING)  # Show more in dev
+    print("🔧 Development mode: Verbose logging")
+else:
+    print("🚀 Production mode: Clean logging")
 
 def print_banner():
     """Print production server banner"""
@@ -80,11 +96,26 @@ def main():
         
         logger.info("Loading ML model and initializing server...")
         
+        # Get core configuration with smart defaults
+        flask_env = os.getenv('FLASK_ENV', 'production')
+        server_host = os.getenv('HOST', '0.0.0.0')
+        server_port = int(os.getenv('PORT', 5000))
+        cors_origins = os.getenv('CORS_ORIGINS', '*')
+        
+        # Smart defaults based on environment
+        flask_debug = flask_env == 'development'
+        
+        logger.info("🚀 FloorPlanTo3D API Server Starting")
+        logger.info(f"🌍 Environment: {flask_env}")
+        logger.info(f"🔗 Server: http://{server_host}:{server_port}")
+        logger.info(f"🌐 CORS Origins: {cors_origins}")
+        logger.info(f"📝 Log Level: {os.getenv('LOG_LEVEL', 'info').upper()}")
+        
         # Start the server
         app.run(
-            debug=False,
-            host='0.0.0.0',
-            port=5000,
+            debug=flask_debug,
+            host=server_host,
+            port=server_port,
             threaded=True,
             use_reloader=False
         )

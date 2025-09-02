@@ -5,31 +5,31 @@ import os
 # Load environment variables
 try:
     from dotenv import load_dotenv
-    load_dotenv()  # Load .env file if it exists
+    load_dotenv()
 except ImportError:
-    pass  # python-dotenv not installed, use system env vars only
+    pass
 
-# Server socket
+# Core server settings with smart defaults
 host = os.getenv('HOST', '0.0.0.0')
 port = os.getenv('PORT', '5000')
 bind = f"{host}:{port}"
-backlog = int(os.getenv('BACKLOG', 2048))
 
-# Worker processes
-workers = int(os.getenv('WORKERS', min(4, multiprocessing.cpu_count())))
+# Smart defaults for production
+workers = min(4, multiprocessing.cpu_count())
 worker_class = "sync"
-worker_connections = int(os.getenv('WORKER_CONNECTIONS', 1000))
-timeout = int(os.getenv('WORKER_TIMEOUT', 300))  # 5 minutes timeout for ML inference
+worker_connections = 1000
+timeout = 300  # 5 minutes for ML inference
 keepalive = 2
+backlog = 2048
 
-# Memory and performance
-max_requests = int(os.getenv('MAX_REQUESTS', 100))  # Restart workers after N requests
-max_requests_jitter = int(os.getenv('MAX_REQUESTS_JITTER', 20))
-preload_app = True  # Load model once and share across workers
+# Memory management
+max_requests = 100
+max_requests_jitter = 20
+preload_app = True
 
 # Logging
-accesslog = os.getenv('ACCESS_LOG', 'access.log')
-errorlog = os.getenv('ERROR_LOG', 'error.log')
+accesslog = 'access.log'
+errorlog = 'error.log'
 loglevel = os.getenv('LOG_LEVEL', 'info').lower()
 access_log_format = '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s" %(D)s'
 
@@ -43,12 +43,9 @@ user = None
 group = None
 tmp_upload_dir = None
 
-# SSL configuration (set via environment variables)
-ssl_keyfile = os.getenv('SSL_KEYFILE')
-ssl_certfile = os.getenv('SSL_CERTFILE')
-if ssl_keyfile and ssl_certfile:
-    keyfile = ssl_keyfile
-    certfile = ssl_certfile
+# SSL configuration (uncomment and set paths if needed)
+# keyfile = "server.key"
+# certfile = "server.crt"
 
 # Resource limits
 limit_request_line = 4096
