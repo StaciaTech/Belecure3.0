@@ -102,6 +102,106 @@ app.get('/api/system', (req, res) => {
   });
 });
 
+// Memory monitoring endpoint for speedometer
+app.get('/api/memory', async (req, res) => {
+  try {
+    // Fetch memory data from Python AI server
+    const pythonMemoryUrl = `${process.env.PYTHON_SERVER_URL || 'http://localhost:5000'}/memory`;
+    const pythonResponse = await fetch(pythonMemoryUrl, { 
+      method: 'GET',
+      timeout: 10000 
+    });
+    
+    if (!pythonResponse.ok) {
+      throw new Error(`Python server responded with status: ${pythonResponse.status}`);
+    }
+    
+    const pythonMemoryData = await pythonResponse.json();
+    
+    // Get Node.js process memory info
+    const nodeMemory = process.memoryUsage();
+    const nodeMemoryMB = {
+      rss: Math.round(nodeMemory.rss / 1024 / 1024 * 100) / 100,
+      heapTotal: Math.round(nodeMemory.heapTotal / 1024 / 1024 * 100) / 100,
+      heapUsed: Math.round(nodeMemory.heapUsed / 1024 / 1024 * 100) / 100,
+      external: Math.round(nodeMemory.external / 1024 / 1024 * 100) / 100
+    };
+    
+    // Format data for frontend speedometer
+    const formattedData = {
+      success: true,
+      timestamp: new Date().toISOString(),
+      speedometer_data: {
+        // Main speedometer values (0-100%)
+        memory_usage_percent: pythonMemoryData.system_memory?.usage_percent || 0,
+        cpu_usage_percent: pythonMemoryData.cpu_info?.usage_percent || 0,
+        
+        // Speedometer display info
+        current_value: pythonMemoryData.system_memory?.usage_percent || 0,
+        max_value: 100,
+        unit: '%',
+        label: 'Memory Usage',
+        
+        // Color zones for speedometer
+        zones: [
+          { min: 0, max: 50, color: '#22c55e' },    // Green (Good)
+          { min: 50, max: 75, color: '#f59e0b' },   // Yellow (Warning)
+          { min: 75, max: 90, color: '#ef4444' },   // Red (Critical)
+          { min: 90, max: 100, color: '#dc2626' }   // Dark Red (Danger)
+        ]
+      },
+      detailed_info: {
+        system_memory: pythonMemoryData.system_memory,
+        process_memory: pythonMemoryData.process_memory,
+        cpu_info: pythonMemoryData.cpu_info,
+        ai_server_status: pythonMemoryData.ai_server_status,
+        node_server: {
+          memory_mb: nodeMemoryMB,
+          uptime_seconds: Math.round(process.uptime()),
+          pid: process.pid
+        }
+      },
+      raw_python_data: pythonMemoryData
+    };
+    
+    res.json(formattedData);
+    
+  } catch (error) {
+    console.error('Memory monitoring error:', error);
+    
+    // Provide fallback data if Python server is unavailable
+    const fallbackData = {
+      success: false,
+      error: 'Unable to fetch memory data from AI server',
+      message: error.message,
+      timestamp: new Date().toISOString(),
+      speedometer_data: {
+        memory_usage_percent: 0,
+        cpu_usage_percent: 0,
+        current_value: 0,
+        max_value: 100,
+        unit: '%',
+        label: 'System Memory Usage (Offline)',
+        zones: [
+          { min: 0, max: 50, color: '#6b7280' },    // Gray (Offline)
+          { min: 50, max: 75, color: '#6b7280' },
+          { min: 75, max: 90, color: '#6b7280' },
+          { min: 90, max: 100, color: '#6b7280' }
+        ]
+      },
+      detailed_info: {
+        node_server: {
+          memory_mb: process.memoryUsage(),
+          uptime_seconds: Math.round(process.uptime()),
+          pid: process.pid
+        }
+      }
+    };
+    
+    res.status(503).json(fallbackData);
+  }
+});
+
 // 404 handler for API routes
 app.use('/api/*', (req, res) => {
   res.status(404).json({

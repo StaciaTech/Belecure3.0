@@ -4,6 +4,7 @@ import UploadArea from '../components/UploadArea';
 import StatsCard from '../components/StatsCard';
 import RecentProjects from '../components/RecentProjects';
 import SystemStatus from '../components/SystemStatus';
+import MemorySpeedometer from '../components/MemorySpeedometer';
 import { Brain, Zap, TrendingUp, Rocket } from 'lucide-react';
 import api, { StatsData } from '../services/api';
 
@@ -136,6 +137,9 @@ const HomePage: React.FC = () => {
             
             {/* Functional System Status */}
             <SystemStatus refreshInterval={15000} />
+            
+            {/* Real-time Memory Speedometer */}
+            <MemorySpeedometer refreshInterval={3000} size={220} showDetails={true} />
           </div>
         </div>
       </main>

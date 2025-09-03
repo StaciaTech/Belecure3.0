@@ -334,6 +334,77 @@ def metrics():
         'psutil_available': memory_monitor.psutil_available
     })
 
+@app.route('/memory', methods=['GET'])
+def memory_status():
+    """Real-time memory monitoring endpoint for speedometer display"""
+    try:
+        # Get comprehensive memory information
+        memory_info = psutil.virtual_memory()
+        swap_info = psutil.swap_memory()
+        
+        # Calculate memory usage
+        total_memory_gb = memory_info.total / (1024**3)
+        used_memory_gb = memory_info.used / (1024**3)
+        available_memory_gb = memory_info.available / (1024**3)
+        memory_percent = memory_info.percent
+        
+        # Get process-specific memory usage
+        process = psutil.Process()
+        process_memory_mb = process.memory_info().rss / (1024**2)
+        process_memory_percent = (process.memory_info().rss / memory_info.total) * 100
+        
+        # CPU information for additional context
+        cpu_percent = psutil.cpu_percent(interval=0.1)
+        cpu_count = psutil.cpu_count()
+        
+        return jsonify({
+            'success': True,
+            'timestamp': datetime.now().isoformat(),
+            'system_memory': {
+                'total_gb': round(total_memory_gb, 2),
+                'used_gb': round(used_memory_gb, 2),
+                'available_gb': round(available_memory_gb, 2),
+                'usage_percent': round(memory_percent, 1),
+                'free_percent': round(100 - memory_percent, 1)
+            },
+            'process_memory': {
+                'used_mb': round(process_memory_mb, 2),
+                'used_gb': round(process_memory_mb / 1024, 3),
+                'percent_of_total': round(process_memory_percent, 2)
+            },
+            'swap_memory': {
+                'total_gb': round(swap_info.total / (1024**3), 2),
+                'used_gb': round(swap_info.used / (1024**3), 2),
+                'usage_percent': round(swap_info.percent, 1)
+            },
+            'cpu_info': {
+                'usage_percent': round(cpu_percent, 1),
+                'core_count': cpu_count
+            },
+            'ai_server_status': {
+                'model_loaded': _model_loaded,
+                'requests_processed': _request_count,
+                'uptime_seconds': round(time.time() - _start_time, 2)
+            }
+        })
+        
+    except Exception as e:
+        logger.error(f"Memory monitoring error: {str(e)}")
+        return jsonify({
+            'success': False,
+            'error': 'Failed to retrieve memory information',
+            'message': str(e),
+            'fallback_data': {
+                'system_memory': {
+                    'total_gb': 0,
+                    'used_gb': 0,
+                    'available_gb': 0,
+                    'usage_percent': 0,
+                    'free_percent': 100
+                }
+            }
+        }), 500
+
 @app.route('/predict', methods=['POST'])
 @monitor_request
 def predict():
