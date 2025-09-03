@@ -64,7 +64,7 @@ class AppConfig:
 
 class PredictionConfig(Config):
     NAME = "floorPlan_cfg"
-    NUM_CLASSES = 1 + 3  # background + door + wall + window
+    NUM_CLASSES = 4  # 4 total classes (1 background + 3 object classes: door, wall, window)
     GPU_COUNT = 1
     IMAGES_PER_GPU = 1
 
